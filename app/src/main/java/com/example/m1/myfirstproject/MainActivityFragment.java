@@ -57,7 +57,6 @@ public class MainActivityFragment extends Fragment {
     static ArrayList<String> userRating;
     static ArrayList<String> releaseDate;
     static ArrayList<Boolean> favorite;
-    static ArrayList<String> youtubeLink;
     static ArrayList<String> ids;
     static ArrayList<ArrayList<String>> review;
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
@@ -211,7 +210,6 @@ public class MainActivityFragment extends Fragment {
         ratingFavorites=new ArrayList<String>();
         dateFavorites=new ArrayList<String>();
         overviewFavorites=new ArrayList<String>();
-        favoriteFavorites=new ArrayList<Boolean>();
         if(cursor==null)
             return;
         while(cursor.moveToNext())
@@ -223,7 +221,7 @@ public class MainActivityFragment extends Fragment {
             overviewFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.OVERVIEW)));
             favoriteFavorites.add(true);
         }
-
+        cursor.close();
     }
 
     public boolean isNetworkAvailable() {

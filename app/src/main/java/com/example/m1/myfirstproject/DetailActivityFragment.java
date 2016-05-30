@@ -277,7 +277,7 @@ public class DetailActivityFragment extends Fragment {
     public void onCreate(Bundle savedInstance)
     {
         super.onCreate(savedInstance);
-
+        setHasOptionsMenu(true);
     }
     
     public void onCreateOptionsMenu(Menu menu,MenuInflater menuInflater)
