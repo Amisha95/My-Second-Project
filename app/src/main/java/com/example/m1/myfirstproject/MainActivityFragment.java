@@ -108,7 +108,7 @@ public class MainActivityFragment extends Fragment {
                                 putExtra("overview", overviewFavorites.get(position)).
                                 putExtra("vote_average", ratingFavorites.get(position)).
                                 putExtra("release_date", dateFavorites.get(position)).
-                                putExtra("favorite", favoriteFavorites.get(position));
+                                putExtra("favorite", favorite.get(position));
                         startActivity(intent);
                     }
                 }
@@ -200,28 +200,30 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
-    public void LoadFavorites()
-    {
-        String URL="content://com.example.provider.Movies/movies";
-        Uri favorites=Uri.parse(URL);
-        Cursor cursor=getActivity().getContentResolver().query(favorites,null,null,null,"title");
-        posterFavorites=new ArrayList<String>();
-        titlesFavorites=new ArrayList<String>();
-        ratingFavorites=new ArrayList<String>();
-        dateFavorites=new ArrayList<String>();
-        overviewFavorites=new ArrayList<String>();
-        if(cursor==null)
-            return;
-        while(cursor.moveToNext())
-        {
-            posterFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.NAME)));
-            titlesFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.TITLE)));
-            ratingFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.RATING)));
-            dateFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.DATE)));
-            overviewFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.OVERVIEW)));
-            favoriteFavorites.add(true);
+    public void LoadFavorites() {
+        Cursor cursor = null;
+        try {
+            String URL = "content://com.example.provider.Movies/movies";
+            Uri favorites = Uri.parse(URL);
+            cursor = getActivity().getContentResolver().query(favorites, null, null, null, "title");
+            posterFavorites = new ArrayList<String>();
+            titlesFavorites = new ArrayList<String>();
+            ratingFavorites = new ArrayList<String>();
+            dateFavorites = new ArrayList<String>();
+            overviewFavorites = new ArrayList<String>();
+            if (cursor == null)
+                return;
+            while (cursor.moveToNext()) {
+                posterFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.NAME)));
+                titlesFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.TITLE)));
+                ratingFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.RATING)));
+                dateFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.DATE)));
+                overviewFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.OVERVIEW)));
+                //favorite.add(true);
+            }
+        } finally {
+            cursor.close();
         }
-        cursor.close();
     }
 
     public boolean isNetworkAvailable() {
