@@ -117,7 +117,8 @@
                         android:paddingTop="10dp"
                         android:id="@+id/review"
                         android:textSize="15dp"
-                        android:gravity="center_vertical" />
+                        android:gravity="center_vertical"
+                        />
                
             </LinearLayout>
         </RelativeLayout>

@@ -69,7 +69,7 @@ public class DetailActivity extends AppCompatActivity {
         {
             b.setText("FAVORITE");
             b.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.MULTIPLY);
-            getContentResolver().delete(Uri.parse("content://com.example.provider.Movies/movies"),"title=?",
+            getContentResolver().delete(Uri.parse("content://com.example.provider.Movies/movies"), "title=?",
                     new String[]{DetailActivityFragment.title});
         }
     }
@@ -80,4 +80,5 @@ public class DetailActivity extends AppCompatActivity {
                 +DetailActivityFragment.youtubes));
         startActivity(browserIntent);
     }
+
 }

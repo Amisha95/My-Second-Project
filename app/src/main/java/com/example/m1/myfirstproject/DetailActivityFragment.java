@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -80,7 +79,18 @@ public class DetailActivityFragment extends Fragment {
             }
             return comments;
         }
+
+
+        protected void onPostExecute(ArrayList<String> result)
+        {
+            for (int i = 0; i < result.size(); i++) {
+            TextView textView1 = (TextView)getView().findViewById(R.id.review);
+            textView1.setText(result.get(i));
+        }
+       }
     }
+
+
 
     public ArrayList<String> getReviewFromID(ArrayList<String> ids) throws IOException {
         String reviewId = getActivity().getIntent().getStringExtra("id");
@@ -220,24 +230,6 @@ public class DetailActivityFragment extends Fragment {
         final ReviewLoadTask reviewLoadTask=new ReviewLoadTask();
         reviewLoadTask.execute();
 
-        RelativeLayout mTags = (RelativeLayout)getActivity().findViewById(R.id.relative);
-        if(comments!=null) {
-            for (int i = 0; i < comments.size(); i++) {
-                View mReviewItem = LayoutInflater.from(getActivity()).inflate(
-                        R.layout.review_layout, null);
-                mReviewItem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        reviewLoadTask.execute();
-                    }
-                });
-                TextView textView1 = (TextView) mReviewItem.findViewById(R.id.reviewTextt);
-                textView1.setText(comments.get(i));
-                mTags.addView(mReviewItem);
-            }
-        }
-
-
         if(intent!=null && intent.hasExtra("original_title"))
         {
             title=intent.getStringExtra("original_title");
@@ -316,4 +308,5 @@ public class DetailActivityFragment extends Fragment {
         shareIntent.putExtra(Intent.EXTRA_TEXT,"Watch this trailer!!!");
         return shareIntent;
     }
+
 }
