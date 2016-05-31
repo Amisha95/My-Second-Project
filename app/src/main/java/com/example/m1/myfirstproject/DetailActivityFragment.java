@@ -220,7 +220,7 @@ public class DetailActivityFragment extends Fragment {
         ReviewLoadTask reviewLoadTask=new ReviewLoadTask();
      //   reviewLoadTask.execute();
 
-        RelativeLayout mTags = (RelativeLayout)getActivity().findViewById(R.id.relativeLayoutt);
+        RelativeLayout mTags = (RelativeLayout)getActivity().findViewById(R.id.relative);
         for(int i=0;i<comments.size();i++){
             View mReviewItem = LayoutInflater.from(getActivity()).inflate(
                     R.layout.review_layout, null);
