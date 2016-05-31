@@ -49,7 +49,8 @@ public class MainActivityFragment extends Fragment {
     static ArrayList<String> overviewFavorites;
     static ArrayList<String> ratingFavorites;
     static ArrayList<String> dateFavorites;
-    static ArrayList<Boolean> favoriteFavorites;
+    static ArrayList<String> idsFavorites;
+    static ArrayList<String> reviewFavorites;
 
     static ArrayList<String> originalTitle;
     static ArrayList<String> moviePosterThumbnail;
@@ -108,6 +109,7 @@ public class MainActivityFragment extends Fragment {
                                 putExtra("overview", overviewFavorites.get(position)).
                                 putExtra("vote_average", ratingFavorites.get(position)).
                                 putExtra("release_date", dateFavorites.get(position)).
+                                putExtra("id", idsFavorites.get(position)).
                                 putExtra("favorite", favorite.get(position));
                         startActivity(intent);
                     }
@@ -211,6 +213,7 @@ public class MainActivityFragment extends Fragment {
             ratingFavorites = new ArrayList<String>();
             dateFavorites = new ArrayList<String>();
             overviewFavorites = new ArrayList<String>();
+            idsFavorites=new ArrayList<String>();
             if (cursor == null)
                 return;
             while (cursor.moveToNext()) {
@@ -219,7 +222,9 @@ public class MainActivityFragment extends Fragment {
                 ratingFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.RATING)));
                 dateFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.DATE)));
                 overviewFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.OVERVIEW)));
-                //favorite.add(true);
+                idsFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.YOUTUBE)));
+                idsFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.REVIEW)));
+          //      favorite.add(true);
             }
         } finally {
             cursor.close();

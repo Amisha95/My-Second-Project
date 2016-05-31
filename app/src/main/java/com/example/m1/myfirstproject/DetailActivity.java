@@ -60,7 +60,6 @@ public class DetailActivity extends AppCompatActivity {
             contentValues.put(MovieProvider.YOUTUBE,DetailActivityFragment.youtubes);
             contentValues.put(MovieProvider.RATING,DetailActivityFragment.rating);
             contentValues.put(MovieProvider.REVIEW,DetailActivityFragment.review);
-
             getContentResolver().insert(MovieProvider.CONTENT_URI,contentValues);
 
 

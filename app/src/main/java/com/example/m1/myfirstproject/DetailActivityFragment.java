@@ -43,7 +43,6 @@ public class DetailActivityFragment extends Fragment {
     public static String rating;
     public static String date;
     public static String review;
-    static ArrayList<String> ids;
     static String id;
     static String youtubes;
     static ArrayList<String> comments;
@@ -73,7 +72,7 @@ public class DetailActivityFragment extends Fragment {
         @Override
         protected ArrayList<String> doInBackground(Void... params) {
             try {
-                comments=getReviewFromID(ids);
+                comments=getReviewFromID(id);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -81,18 +80,18 @@ public class DetailActivityFragment extends Fragment {
         }
 
 
-        protected void onPostExecute(ArrayList<String> result)
+        protected void onPostExecute(ArrayList<String> comments)
         {
-            for (int i = 0; i < result.size(); i++) {
+            for (int i = 0; i < comments.size(); i++) {
             TextView textView1 = (TextView)getView().findViewById(R.id.review);
-            textView1.setText(result.get(i));
+            textView1.setText(comments.get(i));
         }
        }
     }
 
 
 
-    public ArrayList<String> getReviewFromID(ArrayList<String> ids) throws IOException {
+    public ArrayList<String> getReviewFromID(String ids) throws IOException {
         String reviewId = getActivity().getIntent().getStringExtra("id");
         ArrayList<String> result = new ArrayList<>();
             HttpURLConnection connection = null;
@@ -143,18 +142,18 @@ public class DetailActivityFragment extends Fragment {
     public String getReviewFromJSON(String JSONStringParam) throws JSONException {
         JSONObject JSONString=new JSONObject(JSONStringParam);
         JSONArray ReviewArray=JSONString.getJSONArray("results");
-        String result=new String();
+        ArrayList<String> result=new ArrayList<String>();
         if(ReviewArray.length()==0)
         {
-            result="No Review Available";
-            return result;
+            result.add("No Review Available");
         }
-        for(int i=0;i<ReviewArray.length();i++)
-        {
-            JSONObject results=ReviewArray.getJSONObject(i);
-            results.getString("content");
+        else {
+            for (int i = 0; i < ReviewArray.length(); i++) {
+                JSONObject results = ReviewArray.getJSONObject(i);
+                return results.getString("content");
+            }
         }
-        return result;
+        return result.toString();
     }
 
 
