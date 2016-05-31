@@ -13,7 +13,8 @@
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/relative">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
@@ -107,10 +108,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
                     android:background="@android:color/black"/>
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recyclerView">
                     <TextView
                         android:text="Reviews"
                         android:layout_width="fill_parent"
@@ -121,7 +118,7 @@
                         android:id="@+id/review"
                         android:textSize="15dp"
                         android:gravity="center_vertical" />
-                </android.support.v7.widget.RecyclerView>
+               
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

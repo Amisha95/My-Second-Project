@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -46,7 +47,7 @@ public class DetailActivityFragment extends Fragment {
     static ArrayList<String> ids;
     static String id;
     static String youtubes;
-    static ArrayList<ArrayList<String>> comments;
+    static ArrayList<String> comments;
     private ShareActionProvider shareActionProvider;
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
 
@@ -68,10 +69,10 @@ public class DetailActivityFragment extends Fragment {
         }
     }
 
-     public class ReviewLoadTask extends AsyncTask<Void,Void,ArrayList<ArrayList<String>>>
+     public class ReviewLoadTask extends AsyncTask<Void,Void,ArrayList<String>>
     {
         @Override
-        protected ArrayList<ArrayList<String>> doInBackground(Void... params) {
+        protected ArrayList<String> doInBackground(Void... params) {
             try {
                 comments=getReviewFromID(ids);
             } catch (IOException e) {
@@ -81,9 +82,9 @@ public class DetailActivityFragment extends Fragment {
         }
     }
 
-    public ArrayList<ArrayList<String>> getReviewFromID(ArrayList<String> ids) throws IOException {
+    public ArrayList<String> getReviewFromID(ArrayList<String> ids) throws IOException {
         String reviewId = getActivity().getIntent().getStringExtra("id");
-        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<>();
             HttpURLConnection connection = null;
             BufferedReader bufferedReader = null;
             String JSONResult;
@@ -129,19 +130,19 @@ public class DetailActivityFragment extends Fragment {
         return result;
     }
 
-    public ArrayList<String> getReviewFromJSON(String JSONStringParam) throws JSONException {
+    public String getReviewFromJSON(String JSONStringParam) throws JSONException {
         JSONObject JSONString=new JSONObject(JSONStringParam);
         JSONArray ReviewArray=JSONString.getJSONArray("results");
-        ArrayList<String> result=new ArrayList<>();
+        String result=new String();
         if(ReviewArray.length()==0)
         {
-            result.add("No Review Available");
+            result="No Review Available";
             return result;
         }
         for(int i=0;i<ReviewArray.length();i++)
         {
             JSONObject results=ReviewArray.getJSONObject(i);
-            result.add(results.getString("content"));
+            results.getString("content");
         }
         return result;
     }
@@ -217,8 +218,22 @@ public class DetailActivityFragment extends Fragment {
         YoutubeReviewLoadTask youtubeReviewLoadTask=new YoutubeReviewLoadTask();
         youtubeReviewLoadTask.execute();
         ReviewLoadTask reviewLoadTask=new ReviewLoadTask();
-        reviewLoadTask.execute();
+     //   reviewLoadTask.execute();
 
+        RelativeLayout mTags = (RelativeLayout)getActivity().findViewById(R.id.relativeLayoutt);
+        for(int i=0;i<comments.size();i++){
+            View mReviewItem = LayoutInflater.from(getActivity()).inflate(
+                    R.layout.review_layout, null);
+            mReviewItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new ReviewLoadTask();
+                }
+            });
+            TextView textView1 = (TextView)mReviewItem.findViewById(R.id.reviewTextt);
+            textView1.setText(comments.get(i));
+            mTags.addView(mReviewItem);
+        }
 
 
         if(intent!=null && intent.hasExtra("original_title"))
@@ -268,10 +283,10 @@ public class DetailActivityFragment extends Fragment {
                 b.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.MULTIPLY);
             }
         }
-
-
         return rootView;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstance)
