@@ -217,22 +217,24 @@ public class DetailActivityFragment extends Fragment {
         getActivity().setTitle("Movie Details");
         YoutubeReviewLoadTask youtubeReviewLoadTask=new YoutubeReviewLoadTask();
         youtubeReviewLoadTask.execute();
-        ReviewLoadTask reviewLoadTask=new ReviewLoadTask();
-     //   reviewLoadTask.execute();
+        final ReviewLoadTask reviewLoadTask=new ReviewLoadTask();
+        reviewLoadTask.execute();
 
         RelativeLayout mTags = (RelativeLayout)getActivity().findViewById(R.id.relative);
-        for(int i=0;i<comments.size();i++){
-            View mReviewItem = LayoutInflater.from(getActivity()).inflate(
-                    R.layout.review_layout, null);
-            mReviewItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new ReviewLoadTask();
-                }
-            });
-            TextView textView1 = (TextView)mReviewItem.findViewById(R.id.reviewTextt);
-            textView1.setText(comments.get(i));
-            mTags.addView(mReviewItem);
+        if(comments!=null) {
+            for (int i = 0; i < comments.size(); i++) {
+                View mReviewItem = LayoutInflater.from(getActivity()).inflate(
+                        R.layout.review_layout, null);
+                mReviewItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        reviewLoadTask.execute();
+                    }
+                });
+                TextView textView1 = (TextView) mReviewItem.findViewById(R.id.reviewTextt);
+                textView1.setText(comments.get(i));
+                mTags.addView(mReviewItem);
+            }
         }
 
 
