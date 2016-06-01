@@ -89,7 +89,6 @@ public class MainActivityFragment extends Fragment {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    favorite=new ArrayList<Boolean>();
                     if(!sortByFavorites) {
                        favorite = bindFavoriteToMovies();
                         Intent intent = new Intent(getActivity(), DetailActivity.class).
@@ -137,18 +136,19 @@ public class MainActivityFragment extends Fragment {
 
     public ArrayList<Boolean> bindFavoriteToMovies()
     {
-        ArrayList<Boolean> result=new ArrayList<>();
+        ArrayList<Boolean> result=new ArrayList<Boolean>();
         for(int i=0;i<originalTitle.size();i++)
         {
             result.add(false);
         }
-        for(String FavoriteTitles:posterFavorites)
+
+        for(String FavoriteTitles:titlesFavorites)
         {
-            for(int j=0;j<originalTitle.size();j++)
+            for(int i=0;i<originalTitle.size();i++)
             {
-                if(FavoriteTitles.equals(originalTitle.get(j)))
+                if(FavoriteTitles.equals(originalTitle.get(i)))
                 {
-                    result.set(j,true);
+                    result.set(i,true);
                 }
             }
         }
@@ -215,7 +215,7 @@ public class MainActivityFragment extends Fragment {
             dateFavorites = new ArrayList<String>();
             overviewFavorites = new ArrayList<String>();
             idsFavorites=new ArrayList<String>();
-
+            favorite=new ArrayList<Boolean>();
             if (cursor == null)
                 return;
             while (cursor.moveToNext()) {
