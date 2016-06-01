@@ -54,12 +54,12 @@ public class MovieProvider extends ContentProvider {
     static final int DATABASE_VERSION = 1;
     static final String CREATE_DB_TABLE =
             " CREATE TABLE " + MOVIES_TABLE_NAME +
-                    " (name, " +
-                    " overview, " +
-                    " title, " +
-                    " review, " +
-                    " rating, " +
-                    " youtube, " +
+                    " (name," +
+                    " overview," +
+                    " title," +
+                    " review," +
+                    " rating," +
+                    " youtube," +
                     " date);";
 
     /**

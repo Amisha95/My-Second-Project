@@ -89,6 +89,7 @@ public class MainActivityFragment extends Fragment {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    favorite=new ArrayList<Boolean>();
                     if(!sortByFavorites) {
                        favorite = bindFavoriteToMovies();
                         Intent intent = new Intent(getActivity(), DetailActivity.class).
@@ -214,6 +215,7 @@ public class MainActivityFragment extends Fragment {
             dateFavorites = new ArrayList<String>();
             overviewFavorites = new ArrayList<String>();
             idsFavorites=new ArrayList<String>();
+
             if (cursor == null)
                 return;
             while (cursor.moveToNext()) {
@@ -224,7 +226,7 @@ public class MainActivityFragment extends Fragment {
                 overviewFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.OVERVIEW)));
                 idsFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.YOUTUBE)));
                 idsFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.REVIEW)));
-          //      favorite.add(true);
+                favorite.add(true);
             }
         } finally {
             cursor.close();
