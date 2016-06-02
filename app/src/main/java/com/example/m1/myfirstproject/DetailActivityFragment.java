@@ -78,6 +78,7 @@ public class DetailActivityFragment extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            review= String.valueOf(comments);
             return comments;
         }
 
@@ -87,7 +88,6 @@ public class DetailActivityFragment extends Fragment {
             for (int i = 0; i < comments.size(); i++) {
             TextView textView1 = (TextView)getView().findViewById(R.id.review);
             textView1.setText(comments.get(i));
-                review=comments.get(i);
         }
        }
     }
@@ -228,11 +228,14 @@ public class DetailActivityFragment extends Fragment {
         Intent intent=getActivity().getIntent();
         getActivity().setTitle("Movie Details");
 
-        if(intent!=null && intent.hasExtra("id")) {
+        if(intent!=null && intent.hasExtra("id"))
+        {
             YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
-          youtubeReviewLoadTask.execute();
+            youtubeReviewLoadTask.execute();
             ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
-           reviewLoadTask.execute();
+            reviewLoadTask.execute();
+            TextView textView=(TextView)rootView.findViewById(R.id.review);
+            textView.setText(review);
         }
 
         if(intent!=null && intent.hasExtra("original_title"))
