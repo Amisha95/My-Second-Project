@@ -44,6 +44,7 @@ public class DetailActivityFragment extends Fragment {
     public static String date;
     public static String youtube;
     public static String review;
+    public static boolean favorite;
     static String id;
     static String youtubes;
     static ArrayList<String> comments;
@@ -269,7 +270,8 @@ public class DetailActivityFragment extends Fragment {
             Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+path).into(imageView);
         }
 
-        if(intent!=null && intent.getBooleanExtra("favorite", true)) {
+        if(intent!=null && intent.hasExtra("favorite")) {
+            favorite=intent.getBooleanExtra("favorite",false);
             Button b=(Button)rootView.findViewById(R.id.favorite);
             if(b.getText().equals("FAVORITE")) {
                 b.setText("UNFAVORITE");
