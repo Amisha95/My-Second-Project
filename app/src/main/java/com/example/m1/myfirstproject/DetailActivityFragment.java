@@ -264,9 +264,9 @@ public class DetailActivityFragment extends Fragment {
             Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+path).into(imageView);
         }
 
-        if(intent!=null && intent.getBooleanExtra("favorite",true))
-        {
+        if(intent!=null && intent.getBooleanExtra("favorite", true)) {
             Button b=(Button)rootView.findViewById(R.id.favorite);
+            b.setText("UNFAVORITE");
             if(b.getText().equals("FAVORITE")) {
                 b.setText("UNFAVORITE");
                 b.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
@@ -276,6 +276,7 @@ public class DetailActivityFragment extends Fragment {
                 b.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.MULTIPLY);
             }
         }
+
         return rootView;
     }
 
