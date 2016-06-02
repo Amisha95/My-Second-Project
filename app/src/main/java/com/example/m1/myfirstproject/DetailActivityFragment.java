@@ -264,7 +264,7 @@ public class DetailActivityFragment extends Fragment {
             Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+path).into(imageView);
         }
 
-        if(intent!=null && intent.hasExtra("favorite"))
+        if(intent!=null && intent.getBooleanExtra("favorite",true))
         {
             Button b=(Button)rootView.findViewById(R.id.favorite);
             if(b.getText().equals("FAVORITE")) {
