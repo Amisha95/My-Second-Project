@@ -42,7 +42,6 @@ public class DetailActivityFragment extends Fragment {
     public static String overview;
     public static String rating;
     public static String date;
-    public static String youtube;
     public static String review;
     public static boolean favorite;
     static String id;
@@ -236,6 +235,7 @@ public class DetailActivityFragment extends Fragment {
             reviewLoadTask.execute();
             TextView textView=(TextView)rootView.findViewById(R.id.review);
             textView.setText(review);
+
         }
 
         if(intent!=null && intent.hasExtra("original_title"))
@@ -276,6 +276,15 @@ public class DetailActivityFragment extends Fragment {
         if(intent!=null && intent.hasExtra("favorite")) {
             favorite=intent.getBooleanExtra("favorite",false);
             Button b=(Button)rootView.findViewById(R.id.favorite);
+            if(favorite)
+            {
+               b.setText("FAVORITE");
+            }
+            else if(!favorite)
+            {
+                b.setText("UNFAVORITE");
+            }
+
             if(b.getText().equals("FAVORITE")) {
                 b.setText("UNFAVORITE");
                 b.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
