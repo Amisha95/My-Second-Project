@@ -48,10 +48,14 @@ public class PosterAdapter extends BaseAdapter
         if(convertView==null)
         {
             imageView=new ImageView(context);
+            imageView.setPadding(0,0,0,0);
+            imageView.setAdjustViewBounds(true);
         }
         else
         {
             imageView=(ImageView)convertView;
+            imageView.setPadding(0,0,0,0);
+            imageView.setAdjustViewBounds(true);
         }
         Picasso.with(context).load("https://image.tmdb.org/t/p/w185/"+array.get(position))
                 .into(imageView);

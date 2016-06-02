@@ -42,6 +42,7 @@ public class DetailActivityFragment extends Fragment {
     public static String overview;
     public static String rating;
     public static String date;
+    public static String youtube;
     public static String review;
     static String id;
     static String youtubes;
@@ -85,6 +86,7 @@ public class DetailActivityFragment extends Fragment {
             for (int i = 0; i < comments.size(); i++) {
             TextView textView1 = (TextView)getView().findViewById(R.id.review);
             textView1.setText(comments.get(i));
+                review=comments.get(i);
         }
        }
     }
@@ -224,10 +226,13 @@ public class DetailActivityFragment extends Fragment {
         View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
         Intent intent=getActivity().getIntent();
         getActivity().setTitle("Movie Details");
-        YoutubeReviewLoadTask youtubeReviewLoadTask=new YoutubeReviewLoadTask();
-        youtubeReviewLoadTask.execute();
-        final ReviewLoadTask reviewLoadTask=new ReviewLoadTask();
-        reviewLoadTask.execute();
+
+        if(intent!=null && intent.hasExtra("id")) {
+            YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
+          youtubeReviewLoadTask.execute();
+            ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
+           reviewLoadTask.execute();
+        }
 
         if(intent!=null && intent.hasExtra("original_title"))
         {
@@ -266,7 +271,6 @@ public class DetailActivityFragment extends Fragment {
 
         if(intent!=null && intent.getBooleanExtra("favorite", true)) {
             Button b=(Button)rootView.findViewById(R.id.favorite);
-            b.setText("UNFAVORITE");
             if(b.getText().equals("FAVORITE")) {
                 b.setText("UNFAVORITE");
                 b.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
