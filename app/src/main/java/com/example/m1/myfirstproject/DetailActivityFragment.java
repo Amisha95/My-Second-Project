@@ -45,8 +45,8 @@ public class DetailActivityFragment extends Fragment {
     public static String review;
     public static boolean favorite;
     static String id;
-    static String youtubes;
-    static String comments;
+    public static String youtubes;
+    static ArrayList<String> comments=new ArrayList<String>();
     private ShareActionProvider shareActionProvider;
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
 
@@ -68,12 +68,12 @@ public class DetailActivityFragment extends Fragment {
         }
     }
 
-     public class ReviewLoadTask extends AsyncTask<Void,Void,String>
+     public class ReviewLoadTask extends AsyncTask<Void,Void,ArrayList<String>>
     {
         @Override
-        protected String doInBackground(Void... params) {
+        protected ArrayList<String> doInBackground(Void... params) {
             try {
-                comments=getReviewFromID(id);
+                comments.add(getReviewFromID(id));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -81,10 +81,13 @@ public class DetailActivityFragment extends Fragment {
         }
 
 
-        protected void onPostExecute(String comments)
+        protected void onPostExecute(ArrayList<String> comments)
         {
-            TextView textView1 =(TextView)getView().findViewById(R.id.review);
-            textView1.setText(comments);
+            for(int i=0;i<comments.size();i++) {
+                TextView textView1 = (TextView) getView().findViewById(R.id.review);
+                textView1.setText(comments.get(i));
+                review=comments.get(i);
+            }
        }
     }
 
@@ -92,7 +95,7 @@ public class DetailActivityFragment extends Fragment {
 
     public String getReviewFromID(String ids) throws IOException {
         String reviewId = getActivity().getIntent().getStringExtra("id");
-        String result = new String();
+        ArrayList<String> result = new ArrayList<String>();
             HttpURLConnection connection = null;
             BufferedReader bufferedReader = null;
             String JSONResult;
@@ -116,7 +119,7 @@ public class DetailActivityFragment extends Fragment {
 
                 JSONResult = stringBuffer.toString();
                 try {
-                    result=(getReviewFromJSON(JSONResult));
+                    result.add(getReviewFromJSON(JSONResult));
 
                 } catch (JSONException e) {
                     return null;
@@ -135,7 +138,7 @@ public class DetailActivityFragment extends Fragment {
                     bufferedReader.close();
                 }
             }
-        return result;
+        return result.toString();
     }
 
     public String getReviewFromJSON(String JSONStringParam) throws JSONException {
@@ -231,7 +234,7 @@ public class DetailActivityFragment extends Fragment {
             ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
             reviewLoadTask.execute();
             TextView textView=(TextView)rootView.findViewById(R.id.review);
-            textView.setText(comments);
+            textView.setText(review);
         }
 
         if(intent!=null && intent.hasExtra("original_title"))
