@@ -46,7 +46,7 @@ public class DetailActivityFragment extends Fragment {
     public static boolean favorite;
     static String id;
     static String youtubes;
-    static ArrayList<String> comments;
+    static String comments;
     private ShareActionProvider shareActionProvider;
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
 
@@ -68,34 +68,31 @@ public class DetailActivityFragment extends Fragment {
         }
     }
 
-     public class ReviewLoadTask extends AsyncTask<Void,Void,ArrayList<String>>
+     public class ReviewLoadTask extends AsyncTask<Void,Void,String>
     {
         @Override
-        protected ArrayList<String> doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
             try {
                 comments=getReviewFromID(id);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            review= String.valueOf(comments);
             return comments;
         }
 
 
-        protected void onPostExecute(ArrayList<String> comments)
+        protected void onPostExecute(String comments)
         {
-            for (int i = 0; i < comments.size(); i++) {
-            TextView textView1 = (TextView)getView().findViewById(R.id.review);
-            textView1.setText(comments.get(i));
-        }
+            TextView textView1 =(TextView)getView().findViewById(R.id.review);
+            textView1.setText(comments);
        }
     }
 
 
 
-    public ArrayList<String> getReviewFromID(String ids) throws IOException {
+    public String getReviewFromID(String ids) throws IOException {
         String reviewId = getActivity().getIntent().getStringExtra("id");
-        ArrayList<String> result = new ArrayList<>();
+        String result = new String();
             HttpURLConnection connection = null;
             BufferedReader bufferedReader = null;
             String JSONResult;
@@ -119,7 +116,7 @@ public class DetailActivityFragment extends Fragment {
 
                 JSONResult = stringBuffer.toString();
                 try {
-                    result.add(getReviewFromJSON(JSONResult));
+                    result=(getReviewFromJSON(JSONResult));
 
                 } catch (JSONException e) {
                     return null;
@@ -234,8 +231,7 @@ public class DetailActivityFragment extends Fragment {
             ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
             reviewLoadTask.execute();
             TextView textView=(TextView)rootView.findViewById(R.id.review);
-            textView.setText(review);
-
+            textView.setText(comments);
         }
 
         if(intent!=null && intent.hasExtra("original_title"))
