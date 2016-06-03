@@ -86,7 +86,6 @@ public class DetailActivityFragment extends Fragment {
             for(int i=0;i<comments.size();i++) {
                 TextView textView1 = (TextView) getView().findViewById(R.id.review);
                 textView1.setText(comments.get(i));
-                review=comments.get(i);
             }
        }
     }
@@ -229,6 +228,7 @@ public class DetailActivityFragment extends Fragment {
 
         if(intent!=null && intent.hasExtra("id"))
         {
+            review=intent.getStringExtra("id");
             YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
             youtubeReviewLoadTask.execute();
             ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
