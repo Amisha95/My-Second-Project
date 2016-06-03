@@ -74,6 +74,7 @@ public class DetailActivityFragment extends Fragment {
         protected ArrayList<String> doInBackground(Void... params) {
             try {
                 comments.add(getReviewFromID(id));
+                review=getReviewFromID(id);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -234,7 +235,6 @@ public class DetailActivityFragment extends Fragment {
             ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
             reviewLoadTask.execute();
             review=intent.getStringExtra("id");
-            review= String.valueOf(comments);
             TextView textView=(TextView)rootView.findViewById(R.id.review);
             textView.setText(review);
         }
