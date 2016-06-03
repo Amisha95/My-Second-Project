@@ -227,9 +227,9 @@ public class DetailActivityFragment extends Fragment {
         if(intent!=null && intent.hasExtra("id"))
         {
             youtubes=intent.getStringExtra("id");
-            comments=intent.getStringExtra("id");
             YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
             youtubeReviewLoadTask.execute();
+            comments=intent.getStringExtra("id");
             ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
             reviewLoadTask.execute();
         }
