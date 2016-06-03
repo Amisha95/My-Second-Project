@@ -27,6 +27,8 @@ public class MovieProvider extends ContentProvider {
     static final String OVERVIEW = "overview";
     static final String DATE = "date";
     static final String ID = "id";
+    static final String YOUTUBE = "youtube";
+    static final String REVIEW = "review";
     static final String RATING = "rating";
     static final String TITLE = "title";
 
@@ -57,6 +59,8 @@ public class MovieProvider extends ContentProvider {
                     " overview," +
                     " title," +
                     " rating," +
+                    "youtube," +
+                    "review,"+
                     " id," +
                     " date);";
 
@@ -179,7 +183,7 @@ public class MovieProvider extends ContentProvider {
                 count = db.update(MOVIES_TABLE_NAME, values, selection, selectionArgs);
                 break;
 
-            case MOVIES_ID:
+           case MOVIES_ID:
                 count = db.update(MOVIES_TABLE_NAME, values, NAME + " = " + uri.getPathSegments().get(1) +
                         (!TextUtils.isEmpty(selection) ? " AND (" +selection + ')' : ""), selectionArgs);
                 break;
