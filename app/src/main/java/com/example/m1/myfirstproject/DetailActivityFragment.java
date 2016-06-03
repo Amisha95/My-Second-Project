@@ -45,7 +45,7 @@ public class DetailActivityFragment extends Fragment {
     public static boolean favorite;
     static String id;
     public static String youtubes;
-    static String comments=new String();
+    public static String comments=new String();
     private ShareActionProvider shareActionProvider;
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
 
@@ -227,15 +227,11 @@ public class DetailActivityFragment extends Fragment {
         if(intent!=null && intent.hasExtra("id"))
         {
             youtubes=intent.getStringExtra("id");
-            review=intent.getStringExtra("id");
+            comments=intent.getStringExtra("id");
             YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
             youtubeReviewLoadTask.execute();
             ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
             reviewLoadTask.execute();
-
-            TextView textView=(TextView)rootView.findViewById(R.id.review);
-            textView.setText(review);
-
         }
 
         if(intent!=null && intent.hasExtra("original_title"))
