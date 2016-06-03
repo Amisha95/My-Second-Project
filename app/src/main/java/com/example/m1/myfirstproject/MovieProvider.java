@@ -26,9 +26,8 @@ public class MovieProvider extends ContentProvider {
     static final String NAME = "name";
     static final String OVERVIEW = "overview";
     static final String DATE = "date";
-    static final String REVIEW = "review";
+    static final String ID = "id";
     static final String RATING = "rating";
-    static final String YOUTUBE = "youtube";
     static final String TITLE = "title";
 
 
@@ -57,9 +56,8 @@ public class MovieProvider extends ContentProvider {
                     " (name," +
                     " overview," +
                     " title," +
-                    " review," +
                     " rating," +
-                    " youtube," +
+                    " id," +
                     " date);";
 
     /**
@@ -140,7 +138,7 @@ public class MovieProvider extends ContentProvider {
              * By default sort on movie titles            */
             sortOrder = NAME;
         }
-        Cursor c = qb.query(db, projection,     selection, selectionArgs,null, null, sortOrder);
+        Cursor c = qb.query(db, projection,selection, selectionArgs,null, null, sortOrder);
 
         /**
          * register to watch a content URI for changes
@@ -196,15 +194,10 @@ public class MovieProvider extends ContentProvider {
     @Override
     public String getType(Uri uri) {
         switch (uriMatcher.match(uri)){
-            /**
-             * Get all student records
-             */
+
             case MOVIES:
                 return "vnd.android.cursor.dir/vnd.example.movies";
 
-            /**
-             * Get a particular student
-             */
             case MOVIES_ID:
                 return "vnd.android.cursor.item/vnd.example.movies";
 

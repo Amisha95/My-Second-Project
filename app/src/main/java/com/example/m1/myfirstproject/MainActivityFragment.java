@@ -49,8 +49,7 @@ public class MainActivityFragment extends Fragment {
     static ArrayList<String> overviewFavorites;
     static ArrayList<String> ratingFavorites;
     static ArrayList<String> dateFavorites;
-    static ArrayList<String> idsRFavorites;
-    static ArrayList<String> idsYFavorites;
+    static ArrayList<String> idsFavorites;
 
 
     static ArrayList<String> originalTitle;
@@ -59,8 +58,7 @@ public class MainActivityFragment extends Fragment {
     static ArrayList<String> userRating;
     static ArrayList<String> releaseDate;
     static ArrayList<Boolean> favorite;
-    static ArrayList<String> idsY;
-    static ArrayList<String> idsR;
+    static ArrayList<String> ids;
 
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
 
@@ -100,8 +98,7 @@ public class MainActivityFragment extends Fragment {
                                 putExtra("vote_average", userRating.get(position)).
                                 putExtra("release_date", releaseDate.get(position)).
                                 putExtra("favorite", favorite.get(position)).
-                                putExtra("id", idsR.get(position)).
-                                putExtra("id", idsY.get(position));
+                                putExtra("id", ids.get(position));
                         startActivity(intent);
                     }
                    else
@@ -112,8 +109,7 @@ public class MainActivityFragment extends Fragment {
                                 putExtra("overview", overviewFavorites.get(position)).
                                 putExtra("vote_average", ratingFavorites.get(position)).
                                 putExtra("release_date", dateFavorites.get(position)).
-                                putExtra("id", idsRFavorites.get(position)).
-                                putExtra("id", idsYFavorites.get(position)).
+                                putExtra("id", idsFavorites.get(position)).
                                 putExtra("favorite", favorite.get(position));
                         startActivity(intent);
                     }
@@ -218,8 +214,7 @@ public class MainActivityFragment extends Fragment {
             ratingFavorites = new ArrayList<String>();
             dateFavorites = new ArrayList<String>();
             overviewFavorites = new ArrayList<String>();
-            idsRFavorites=new ArrayList<String>();
-            idsYFavorites=new ArrayList<String>();
+            idsFavorites=new ArrayList<String>();
             favorite=new ArrayList<Boolean>();
             if (cursor == null)
                 return;
@@ -229,8 +224,7 @@ public class MainActivityFragment extends Fragment {
                 ratingFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.RATING)));
                 dateFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.DATE)));
                 overviewFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.OVERVIEW)));
-                idsYFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.YOUTUBE)));
-                idsRFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.REVIEW)));
+                idsFavorites.add(cursor.getString(cursor.getColumnIndex(MovieProvider.ID)));
                 favorite.add(true);
             }
         } finally {
@@ -302,8 +296,7 @@ public class MainActivityFragment extends Fragment {
                             plotSynopsis = new ArrayList<String>(Arrays.asList(getStringFromJSON(JSONResult, "overview")));
                             userRating = new ArrayList<String>(Arrays.asList(getStringFromJSON(JSONResult, "vote_average")));
                             releaseDate = new ArrayList<String>(Arrays.asList(getStringFromJSON(JSONResult, "release_date")));
-                            idsR = new ArrayList<String>(Arrays.asList(getStringFromJSON(JSONResult, "id")));
-                            idsY = new ArrayList<String>(Arrays.asList(getStringFromJSON(JSONResult, "id")));
+                            ids = new ArrayList<String>(Arrays.asList(getStringFromJSON(JSONResult, "id")));
 
                             return PathsFromJSON(JSONResult);
                         } catch (JSONException e) {
