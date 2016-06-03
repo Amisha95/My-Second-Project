@@ -226,14 +226,16 @@ public class DetailActivityFragment extends Fragment {
 
         if(intent!=null && intent.hasExtra("id"))
         {
-
+            youtubes=intent.getStringExtra("id");
+            review=intent.getStringExtra("id");
             YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
             youtubeReviewLoadTask.execute();
             ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
             reviewLoadTask.execute();
-            review=intent.getStringExtra("id");
+
             TextView textView=(TextView)rootView.findViewById(R.id.review);
             textView.setText(review);
+
         }
 
         if(intent!=null && intent.hasExtra("original_title"))
