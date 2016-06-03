@@ -32,7 +32,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
 
 
 public class DetailActivityFragment extends Fragment {
@@ -46,7 +45,7 @@ public class DetailActivityFragment extends Fragment {
     public static boolean favorite;
     static String id;
     public static String youtubes;
-    static ArrayList<String> comments=new ArrayList<String>();
+    static String comments=new String();
     private ShareActionProvider shareActionProvider;
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
 
@@ -68,12 +67,12 @@ public class DetailActivityFragment extends Fragment {
         }
     }
 
-     public class ReviewLoadTask extends AsyncTask<Void,Void,ArrayList<String>>
+     public class ReviewLoadTask extends AsyncTask<Void,Void,String>
     {
         @Override
-        protected ArrayList<String> doInBackground(Void... params) {
+        protected String doInBackground(Void... params) {
             try {
-                comments.add(getReviewFromID(id));
+                comments=getReviewFromID(id);
                 review=getReviewFromID(id);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,12 +81,10 @@ public class DetailActivityFragment extends Fragment {
         }
 
 
-        protected void onPostExecute(ArrayList<String> comments)
+        protected void onPostExecute(String comments)
         {
-            for(int i=0;i<comments.size();i++) {
                 TextView textView1 = (TextView) getView().findViewById(R.id.review);
-                textView1.setText(comments.get(i));
-            }
+                textView1.setText(comments);
        }
     }
 
@@ -95,7 +92,7 @@ public class DetailActivityFragment extends Fragment {
 
     public String getReviewFromID(String ids) throws IOException {
         String reviewId = getActivity().getIntent().getStringExtra("id");
-        ArrayList<String> result = new ArrayList<String>();
+        String result = new String();
             HttpURLConnection connection = null;
             BufferedReader bufferedReader = null;
             String JSONResult;
@@ -119,7 +116,7 @@ public class DetailActivityFragment extends Fragment {
 
                 JSONResult = stringBuffer.toString();
                 try {
-                    result.add(getReviewFromJSON(JSONResult));
+                    result=getReviewFromJSON(JSONResult);
 
                 } catch (JSONException e) {
                     return null;
@@ -138,16 +135,16 @@ public class DetailActivityFragment extends Fragment {
                     bufferedReader.close();
                 }
             }
-        return result.toString();
+        return result;
     }
 
     public String getReviewFromJSON(String JSONStringParam) throws JSONException {
         JSONObject JSONString=new JSONObject(JSONStringParam);
         JSONArray ReviewArray=JSONString.getJSONArray("results");
-        ArrayList<String> result=new ArrayList<String>();
+        String result=new String();
         if(ReviewArray.length()==0)
         {
-            result.add("No Review Available");
+            result="No Review Available";
         }
         else {
             for (int i = 0; i < ReviewArray.length(); i++) {
@@ -155,7 +152,7 @@ public class DetailActivityFragment extends Fragment {
                 return results.getString("content");
             }
         }
-        return result.toString();
+        return result;
     }
 
 
