@@ -10,7 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity  {
-public static boolean Tablet=false;
+
+    private static final String DETAILFRAGMENT_TAG = "DFTAG";
+    public static boolean Tablet=false;
+    private boolean mTwoPane;
     public boolean isTablet(Context context)
     {
         boolean Ssize=((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK)==4);
@@ -18,15 +21,34 @@ public static boolean Tablet=false;
                 & Configuration.SCREENLAYOUT_SIZE_MASK)==Configuration.SCREENLAYOUT_SIZE_LARGE);
         return (Ssize||size);
     }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Tablet=isTablet(this);
+        if(findViewById(R.id.container_detail) != null) {
+            mTwoPane = true;
+
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container_detail, new DetailActivityFragment()
+                        , DETAILFRAGMENT_TAG)
+                        .commit();
+            }
+        }
+        else {
+            mTwoPane = false;
+        }
+    //    Tablet=isTablet(this);
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+    }
 
     @Override
     public void onDestroy()

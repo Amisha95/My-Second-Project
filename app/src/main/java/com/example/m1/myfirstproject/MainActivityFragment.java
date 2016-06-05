@@ -65,6 +65,7 @@ public class MainActivityFragment extends Fragment {
     public MainActivityFragment() {
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -117,8 +118,10 @@ public class MainActivityFragment extends Fragment {
             });
 
         }
+
         return rootView;
     }
+
 
     private class PreferenceChangeListener implements SharedPreferences.OnSharedPreferenceChangeListener {
         @Override
@@ -129,9 +132,12 @@ public class MainActivityFragment extends Fragment {
 
     }
 
+
     @Override
-    public void onDestroy() {
+    public void onDestroy()
+    {
         super.onDestroy();
+        prefs.unregisterOnSharedPreferenceChangeListener(listener);
     }
 
     public ArrayList<Boolean> bindFavoriteToMovies()
@@ -203,6 +209,7 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
+
     public void LoadFavorites() {
         Cursor cursor = null;
         try {
@@ -231,6 +238,8 @@ public class MainActivityFragment extends Fragment {
             cursor.close();
         }
     }
+
+
 
     public boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
