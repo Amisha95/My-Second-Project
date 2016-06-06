@@ -62,8 +62,12 @@ public class MainActivityFragment extends Fragment {
 
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
 
+
+
+
     public MainActivityFragment() {
     }
+
 
 
     @Override
@@ -85,34 +89,45 @@ public class MainActivityFragment extends Fragment {
             ArrayList<String> arrayList = new ArrayList<String>();
             PosterAdapter adapter = new PosterAdapter(getActivity(), arrayList, width);
             gridView = (GridView) rootView.findViewById(R.id.gridView);
-            gridView.setColumnWidth(width);
+    //        gridView.setColumnWidth(width);
             gridView.setAdapter(adapter);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if(!sortByFavorites) {
-                       favorite = bindFavoriteToMovies();
-                        Intent intent = new Intent(getActivity(), DetailActivity.class).
-                                putExtra("original_title", originalTitle.get(position)).
-                                putExtra("poster_path", moviePosterThumbnail.get(position)).
-                                putExtra("overview", plotSynopsis.get(position)).
-                                putExtra("vote_average", userRating.get(position)).
-                                putExtra("release_date", releaseDate.get(position)).
-                                putExtra("favorite", favorite.get(position)).
-                                putExtra("id", ids.get(position));
-                        startActivity(intent);
+
+                    if (MainActivity.mTwoPane == false) {
+                        if (!sortByFavorites) {
+                            favorite = bindFavoriteToMovies();
+                            Intent intent = new Intent(getActivity(), DetailActivity.class).
+                                    putExtra("original_title", originalTitle.get(position)).
+                                    putExtra("poster_path", moviePosterThumbnail.get(position)).
+                                    putExtra("overview", plotSynopsis.get(position)).
+                                    putExtra("vote_average", userRating.get(position)).
+                                    putExtra("release_date", releaseDate.get(position)).
+                                    putExtra("favorite", favorite.get(position)).
+                                    putExtra("id", ids.get(position));
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(getActivity(), DetailActivity.class).
+                                    putExtra("original_title", titlesFavorites.get(position)).
+                                    putExtra("poster_path", posterFavorites.get(position)).
+                                    putExtra("overview", overviewFavorites.get(position)).
+                                    putExtra("vote_average", ratingFavorites.get(position)).
+                                    putExtra("release_date", dateFavorites.get(position)).
+                                    putExtra("id", idsFavorites.get(position)).
+                                    putExtra("favorite", favorite.get(position));
+                            startActivity(intent);
+                        }
                     }
-                   else
+                    else
                     {
-                        Intent intent = new Intent(getActivity(), DetailActivity.class).
-                                putExtra("original_title", titlesFavorites.get(position)).
-                                putExtra("poster_path", posterFavorites.get(position)).
-                                putExtra("overview", overviewFavorites.get(position)).
-                                putExtra("vote_average", ratingFavorites.get(position)).
-                                putExtra("release_date", dateFavorites.get(position)).
-                                putExtra("id", idsFavorites.get(position)).
-                                putExtra("favorite", favorite.get(position));
-                        startActivity(intent);
+                        Bundle bundle=new Bundle();
+                        DetailActivityFragment fragment=new DetailActivityFragment();
+                        bundle.putStringArrayList("Key_Title",originalTitle);
+                        fragment.setArguments(bundle);
+                        getActivity().getSupportFragmentManager().beginTransaction().
+                                replace(R.id.container_detail, new DetailActivityFragment())
+                                .commit();
                     }
                 }
             });

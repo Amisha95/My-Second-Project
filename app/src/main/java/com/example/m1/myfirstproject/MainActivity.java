@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity  {
 
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
     public static boolean Tablet=false;
-    private boolean mTwoPane;
+    public static boolean mTwoPane;
     public boolean isTablet(Context context)
     {
         boolean Ssize=((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK)==4);
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
         if(findViewById(R.id.container_detail) != null) {
             mTwoPane = true;
-
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_detail, new DetailActivityFragment()
                         , DETAILFRAGMENT_TAG)
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity  {
         else {
             mTwoPane = false;
         }
-    //    Tablet=isTablet(this);
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }

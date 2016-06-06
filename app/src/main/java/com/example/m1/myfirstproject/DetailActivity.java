@@ -20,13 +20,16 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.content_detail);
+
         if(savedInstanceState==null)
         {
-            getSupportFragmentManager().beginTransaction().add(R.id.container_detail,new DetailActivityFragment()).commit();
+          getSupportFragmentManager().beginTransaction().add(R.id.container_detail,new DetailActivityFragment()).commit();
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
     }
 
     @Override
