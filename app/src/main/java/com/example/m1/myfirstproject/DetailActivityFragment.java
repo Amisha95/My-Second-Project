@@ -230,11 +230,9 @@ public class DetailActivityFragment extends Fragment {
             if (bundle != null) {
                 String title = bundle.getString("Key_Title");
                 TextView textVieww = (TextView)rootView.findViewById(R.id.title);
-                textVieww.setText(title);
+                 textVieww.setText(title);
                 }
             }
-
-
 
 
         Intent intent=getActivity().getIntent();
