@@ -225,7 +225,7 @@ public class DetailActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if(savedInstanceState==null) {
-            Bundle bundle = this.getArguments();
+            Bundle bundle = getArguments();
             if (bundle != null) {
                 ArrayList<String> title = bundle.getStringArrayList("Key_Title");
                 TextView textView = (TextView) getActivity().findViewById(R.id.title);

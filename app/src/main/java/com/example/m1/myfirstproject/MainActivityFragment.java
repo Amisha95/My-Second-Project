@@ -92,7 +92,7 @@ public class MainActivityFragment extends Fragment {
             gridView = (GridView) rootView.findViewById(R.id.gridView);
 
             gridView.setAdapter(adapter);
-            
+
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -124,7 +124,7 @@ public class MainActivityFragment extends Fragment {
                     else
                     {
                         Bundle bundle=new Bundle();
-                        DetailActivityFragment fragment=new DetailActivityFragment();
+                        Fragment fragment=new DetailActivityFragment();
                         bundle.putStringArrayList("Key_Title",originalTitle);
                         fragment.setArguments(bundle);
                         getActivity().getSupportFragmentManager().beginTransaction().
