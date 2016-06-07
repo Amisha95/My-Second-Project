@@ -224,17 +224,17 @@ public class DetailActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
+ /*       View rootVieww= inflater.inflate(R.layout.fragment_detail, container, false);
         if(savedInstanceState==null) {
             Bundle bundle = getArguments();
             if (bundle != null) {
                 String title = bundle.getString("Key_Title");
-                TextView textVieww = (TextView)rootView.findViewById(R.id.title);
+                TextView textVieww = (TextView)rootVieww.findViewById(R.id.title);
                  textVieww.setText(title);
                 }
-            }
+            } */
 
-
+        View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
         Intent intent=getActivity().getIntent();
         getActivity().setTitle("Movie Details");
 
