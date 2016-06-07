@@ -167,11 +167,13 @@ public class DetailActivityFragment extends Fragment {
     public String getYoutubeFromId(String ids) throws IOException {
 
         Bundle bundle=getArguments();
-        if(bundle!=null)
-        {
+        if(MainActivity.mTwoPane==true) {
             movieId = bundle.getString("Key_Ids");
         }
-        movieId = getActivity().getIntent().getStringExtra("id");
+
+        else {
+            movieId = getActivity().getIntent().getStringExtra("id");
+        }
         String result = new String();
             HttpURLConnection connection = null;
             BufferedReader bufferedReader = null;
@@ -247,14 +249,12 @@ public class DetailActivityFragment extends Fragment {
                 textView1.setText(title);
 
                 idsFavorites=bundle.getString("Key_Ids");
-                if(idsFavorites!=null) {
-                    YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
-                    youtubeReviewLoadTask.execute();
-                    ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
-                    reviewLoadTask.execute();
-                    TextView textView = (TextView) rootView.findViewById(R.id.review);
-                    textView.setText(comments);
-                }
+                YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
+                youtubeReviewLoadTask.execute();
+                ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
+                reviewLoadTask.execute();
+                TextView textView = (TextView) rootView.findViewById(R.id.review);
+                textView.setText(comments);
 
                 overview=bundle.getString("Key_Overview");
                 TextView textView2=(TextView)rootView.findViewById(R.id.overview);
