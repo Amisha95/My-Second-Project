@@ -5,7 +5,7 @@
     android:name="com.example.m1.myfirstproject.DetailActivityFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout="@layout/fragment_detail"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:layout="@layout/fragment_detail"
     />
 

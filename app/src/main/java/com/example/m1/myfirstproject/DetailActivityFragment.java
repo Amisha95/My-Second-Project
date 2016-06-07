@@ -234,13 +234,14 @@ public class DetailActivityFragment extends Fragment {
                 }
             } */
 
+
         View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
         Intent intent=getActivity().getIntent();
         getActivity().setTitle("Movie Details");
 
-        if (intent == null || intent.getData() == null) {
+    /*    if (intent == null || intent.getData() == null) {
             return null;
-        }
+        } */
 
         if(intent!=null && intent.hasExtra("id"))
         {

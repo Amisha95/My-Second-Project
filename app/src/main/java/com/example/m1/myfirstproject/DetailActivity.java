@@ -21,15 +21,12 @@ public class DetailActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
         if(savedInstanceState==null)
         {
-          getSupportFragmentManager().beginTransaction().add(R.id.container_detail,new DetailActivityFragment()).commit();
+          getSupportFragmentManager().beginTransaction().add(R.id.container_detail, new DetailActivityFragment()).commit();
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
     }
 
     @Override
