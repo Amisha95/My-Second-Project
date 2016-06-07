@@ -224,24 +224,57 @@ public class DetailActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
- /*       View rootVieww= inflater.inflate(R.layout.fragment_detail, container, false);
+        View rootVieww= inflater.inflate(R.layout.fragment_detail, container, false);
         if(savedInstanceState==null) {
             Bundle bundle = getArguments();
             if (bundle != null) {
-                String title = bundle.getString("Key_Title");
-                TextView textVieww = (TextView)rootVieww.findViewById(R.id.title);
-                 textVieww.setText(title);
+                 title=bundle.getString("Key_Title");
+                 TextView textView1=(TextView)rootVieww.findViewById(R.id.title);
+                 textView1.setText(title);
+
+                idsFavorites=bundle.getString("Key_Ids");
+                YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
+                youtubeReviewLoadTask.execute();
+
+                ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
+                reviewLoadTask.execute();
+                TextView textView=(TextView)rootVieww.findViewById(R.id.review);
+                textView.setText(comments);
+
+                overview=bundle.getString("Key_Overview");
+                TextView textView2=(TextView)rootVieww.findViewById(R.id.overview);
+                textView2.setText(overview);
+
+                rating=bundle.getString("Key_Rating");
+                TextView textView3=(TextView)rootVieww.findViewById(R.id.rating);
+                textView3.setText(rating);
+
+                date=bundle.getString("Key_Date");
+                TextView textView4=(TextView)rootVieww.findViewById(R.id.date);
+                textView4.setText(date);
+
+                path=bundle.getString("Key_Path");
+                ImageView imageView=(ImageView)rootVieww.findViewById(R.id.image1);
+                Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+path).into(imageView);
+
+                return rootVieww;
                 }
-            } */
+            }
+
+
+
+
+
+
+
+
+
+
 
 
         View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
         Intent intent=getActivity().getIntent();
         getActivity().setTitle("Movie Details");
-
-    /*    if (intent == null || intent.getData() == null) {
-            return null;
-        } */
 
         if(intent!=null && intent.hasExtra("id"))
         {

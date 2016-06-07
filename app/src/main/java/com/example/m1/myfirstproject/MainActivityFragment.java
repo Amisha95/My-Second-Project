@@ -123,13 +123,23 @@ public class MainActivityFragment extends Fragment {
                     }
                     else
                     {
-                        Bundle bundle=new Bundle();
-                        Fragment fragment=new DetailActivityFragment();
-                        bundle.putString("Key_Title",originalTitle.get(position));
-                        fragment.setArguments(bundle);
-                        getActivity().getSupportFragmentManager().beginTransaction().
-                                replace(R.id.container_detail, fragment)
-                                .commit();
+                        if(!sortByFavorites) {
+                            favorite=bindFavoriteToMovies();
+                            Bundle bundle = new Bundle();
+                            Fragment fragment = new DetailActivityFragment();
+                            bundle.putString("Key_Title", originalTitle.get(position));
+                            bundle.putString("Key_Poster", moviePosterThumbnail.get(position));
+                            bundle.putString("Key_Overview", plotSynopsis.get(position));
+                            bundle.putString("Key_Rating", userRating.get(position));
+                            bundle.putString("Key_Date", releaseDate.get(position));
+                            bundle.putString("Key_Ids", ids.get(position));
+                            bundle.putBoolean("Key_Favorite", favorite.get(position));
+
+                            fragment.setArguments(bundle);
+                            getActivity().getSupportFragmentManager().beginTransaction().
+                                    replace(R.id.container_detail, fragment)
+                                    .commit();
+                        }
                     }
                 }
             });
