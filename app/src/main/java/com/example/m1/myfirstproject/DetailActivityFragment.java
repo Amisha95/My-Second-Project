@@ -32,7 +32,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
 
 
 public class DetailActivityFragment extends Fragment {
@@ -225,20 +224,19 @@ public class DetailActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
         if(savedInstanceState==null) {
             Bundle bundle = getArguments();
             if (bundle != null) {
-                ArrayList<String> title = bundle.getStringArrayList("Key_Title");
-                TextView textVieww = (TextView)getActivity().findViewById(R.id.title);
-                for (int i = 0; i < title.size(); i++) {
-                    textVieww.setText(title.get(i));
+                String title = bundle.getString("Key_Title");
+                TextView textVieww = (TextView)rootView.findViewById(R.id.title);
+                textVieww.setText(title);
                 }
             }
-        }
 
 
-        View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
+
+
         Intent intent=getActivity().getIntent();
         getActivity().setTitle("Movie Details");
 

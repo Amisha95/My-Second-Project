@@ -125,7 +125,7 @@ public class MainActivityFragment extends Fragment {
                     {
                         Bundle bundle=new Bundle();
                         Fragment fragment=new DetailActivityFragment();
-                        bundle.putStringArrayList("Key_Title",originalTitle);
+                        bundle.putString("Key_Title",originalTitle.get(position));
                         fragment.setArguments(bundle);
                         getActivity().getSupportFragmentManager().beginTransaction().
                                 replace(R.id.container_detail, fragment)
