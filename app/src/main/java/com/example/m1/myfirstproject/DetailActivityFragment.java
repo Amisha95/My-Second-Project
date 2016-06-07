@@ -43,6 +43,8 @@ public class DetailActivityFragment extends Fragment {
     public static String date;
     public static String review;
     public static String idsFavorites;
+    String movieId;
+    String reviewId;
     public static boolean favorite;
     static String id;
     public static String youtubes;
@@ -92,7 +94,12 @@ public class DetailActivityFragment extends Fragment {
 
 
     public String getReviewFromID(String ids) throws IOException {
-        String reviewId = getActivity().getIntent().getStringExtra("id");
+        Bundle bundle=getArguments();
+        if(bundle!=null)
+        {
+            reviewId = bundle.getString("Key_Ids");
+        }
+        reviewId = getActivity().getIntent().getStringExtra("id");
         String result = new String();
             HttpURLConnection connection = null;
             BufferedReader bufferedReader = null;
@@ -159,7 +166,12 @@ public class DetailActivityFragment extends Fragment {
 
     public String getYoutubeFromId(String ids) throws IOException {
 
-        String movieId = getActivity().getIntent().getStringExtra("id");
+        Bundle bundle=getArguments();
+        if(bundle!=null)
+        {
+            movieId = bundle.getString("Key_Ids");
+        }
+        movieId = getActivity().getIntent().getStringExtra("id");
         String result = new String();
             HttpURLConnection connection = null;
             BufferedReader bufferedReader = null;
@@ -235,12 +247,14 @@ public class DetailActivityFragment extends Fragment {
                 textView1.setText(title);
 
                 idsFavorites=bundle.getString("Key_Ids");
-                YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
-                youtubeReviewLoadTask.execute();
-                ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
-                reviewLoadTask.execute();
-                TextView textView=(TextView)rootView.findViewById(R.id.review);
-                textView.setText(comments);
+                if(idsFavorites!=null) {
+                    YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
+                    youtubeReviewLoadTask.execute();
+                    ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
+                    reviewLoadTask.execute();
+                    TextView textView = (TextView) rootView.findViewById(R.id.review);
+                    textView.setText(comments);
+                }
 
                 overview=bundle.getString("Key_Overview");
                 TextView textView2=(TextView)rootView.findViewById(R.id.overview);
@@ -258,7 +272,7 @@ public class DetailActivityFragment extends Fragment {
                 ImageView imageView=(ImageView)rootView.findViewById(R.id.image1);
                 Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+path).into(imageView);
 
-                favorite=bundle.getBoolean("Key_Favorite",false);
+                if(favorite=bundle.getBoolean("Key_Favorite",false));
                 Button b=(Button)rootView.findViewById(R.id.favorite);
                 if(favorite)
                 {
