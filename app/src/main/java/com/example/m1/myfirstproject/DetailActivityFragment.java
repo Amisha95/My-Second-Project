@@ -224,9 +224,10 @@ public class DetailActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootVieww= inflater.inflate(R.layout.fragment_detail, container, false);
+
 
         if(savedInstanceState==null) {
+            View rootVieww= inflater.inflate(R.layout.fragment_detail, container, false);
             Bundle bundle = getArguments();
             if (bundle != null) {
                 title=bundle.getString("Key_Title");
@@ -236,7 +237,6 @@ public class DetailActivityFragment extends Fragment {
                 idsFavorites=bundle.getString("Key_Ids");
                 YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
                 youtubeReviewLoadTask.execute();
-
                 ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
                 reviewLoadTask.execute();
                 TextView textView=(TextView)rootVieww.findViewById(R.id.review);
@@ -254,7 +254,7 @@ public class DetailActivityFragment extends Fragment {
                 TextView textView4=(TextView)rootVieww.findViewById(R.id.date);
                 textView4.setText(date);
 
-                path=bundle.getString("Key_Path");
+                path=bundle.getString("Key_Poster");
                 ImageView imageView=(ImageView)rootVieww.findViewById(R.id.image1);
                 Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+path).into(imageView);
 
