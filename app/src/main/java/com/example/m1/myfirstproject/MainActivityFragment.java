@@ -140,6 +140,23 @@ public class MainActivityFragment extends Fragment {
                                     replace(R.id.container_detail, fragment)
                                     .commit();
                         }
+                        else
+                        {
+                            Bundle bundle = new Bundle();
+                            Fragment fragment = new DetailActivityFragment();
+                            bundle.putString("Key_Title", titlesFavorites.get(position));
+                            bundle.putString("Key_Poster", posterFavorites.get(position));
+                            bundle.putString("Key_Overview", overviewFavorites.get(position));
+                            bundle.putString("Key_Rating", ratingFavorites.get(position));
+                            bundle.putString("Key_Date", dateFavorites.get(position));
+                            bundle.putString("Key_Ids", idsFavorites.get(position));
+                            bundle.putBoolean("Key_Favorite", favorite.get(position));
+
+                            fragment.setArguments(bundle);
+                            getActivity().getSupportFragmentManager().beginTransaction().
+                                    replace(R.id.container_detail, fragment)
+                                    .commit();
+                        }
                     }
                 }
             });

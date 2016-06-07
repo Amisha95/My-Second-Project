@@ -225,12 +225,13 @@ public class DetailActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootVieww= inflater.inflate(R.layout.fragment_detail, container, false);
+
         if(savedInstanceState==null) {
             Bundle bundle = getArguments();
             if (bundle != null) {
-                 title=bundle.getString("Key_Title");
-                 TextView textView1=(TextView)rootVieww.findViewById(R.id.title);
-                 textView1.setText(title);
+                title=bundle.getString("Key_Title");
+                TextView textView1=(TextView)rootVieww.findViewById(R.id.title);
+                textView1.setText(title);
 
                 idsFavorites=bundle.getString("Key_Ids");
                 YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
@@ -257,17 +258,29 @@ public class DetailActivityFragment extends Fragment {
                 ImageView imageView=(ImageView)rootVieww.findViewById(R.id.image1);
                 Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+path).into(imageView);
 
+                favorite=bundle.getBoolean("Key_Favorite");
+                Button b=(Button)rootVieww.findViewById(R.id.favorite);
+                if(favorite)
+                {
+                    b.setText("FAVORITE");
+                }
+                else if(!favorite)
+                {
+                    b.setText("UNFAVORITE");
+                }
+
+                if(b.getText().equals("FAVORITE")) {
+                    b.setText("UNFAVORITE");
+                    b.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+                }
+                else {
+                    b.setText("FAVORITE");
+                    b.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.MULTIPLY);
+                }
+
                 return rootVieww;
                 }
             }
-
-
-
-
-
-
-
-
 
 
 
