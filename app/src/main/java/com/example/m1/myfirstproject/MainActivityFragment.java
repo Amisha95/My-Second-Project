@@ -61,6 +61,7 @@ public class MainActivityFragment extends Fragment {
     static ArrayList<String> ids;
 
     static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
+    public ArrayList rotateState;
 
 
 
@@ -89,8 +90,9 @@ public class MainActivityFragment extends Fragment {
             ArrayList<String> arrayList = new ArrayList<String>();
             PosterAdapter adapter = new PosterAdapter(getActivity(), arrayList, width);
             gridView = (GridView) rootView.findViewById(R.id.gridView);
-    //        gridView.setColumnWidth(width);
+
             gridView.setAdapter(adapter);
+            
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
