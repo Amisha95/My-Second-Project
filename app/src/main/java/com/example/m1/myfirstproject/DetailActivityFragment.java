@@ -225,13 +225,13 @@ public class DetailActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
+        View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
         if(savedInstanceState==null) {
-            View rootVieww= inflater.inflate(R.layout.fragment_detail, container, false);
+
             Bundle bundle = getArguments();
             if (bundle != null) {
                 title=bundle.getString("Key_Title");
-                TextView textView1=(TextView)rootVieww.findViewById(R.id.title);
+                TextView textView1=(TextView)rootView.findViewById(R.id.title);
                 textView1.setText(title);
 
                 idsFavorites=bundle.getString("Key_Ids");
@@ -239,27 +239,27 @@ public class DetailActivityFragment extends Fragment {
                 youtubeReviewLoadTask.execute();
                 ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
                 reviewLoadTask.execute();
-                TextView textView=(TextView)rootVieww.findViewById(R.id.review);
+                TextView textView=(TextView)rootView.findViewById(R.id.review);
                 textView.setText(comments);
 
                 overview=bundle.getString("Key_Overview");
-                TextView textView2=(TextView)rootVieww.findViewById(R.id.overview);
+                TextView textView2=(TextView)rootView.findViewById(R.id.overview);
                 textView2.setText(overview);
 
                 rating=bundle.getString("Key_Rating");
-                TextView textView3=(TextView)rootVieww.findViewById(R.id.rating);
+                TextView textView3=(TextView)rootView.findViewById(R.id.rating);
                 textView3.setText(rating);
 
                 date=bundle.getString("Key_Date");
-                TextView textView4=(TextView)rootVieww.findViewById(R.id.date);
+                TextView textView4=(TextView)rootView.findViewById(R.id.date);
                 textView4.setText(date);
 
                 path=bundle.getString("Key_Poster");
-                ImageView imageView=(ImageView)rootVieww.findViewById(R.id.image1);
+                ImageView imageView=(ImageView)rootView.findViewById(R.id.image1);
                 Picasso.with(getActivity()).load("http://image.tmdb.org/t/p/w185/"+path).into(imageView);
 
-                favorite=bundle.getBoolean("Key_Favorite");
-                Button b=(Button)rootVieww.findViewById(R.id.favorite);
+                favorite=bundle.getBoolean("Key_Favorite",false);
+                Button b=(Button)rootView.findViewById(R.id.favorite);
                 if(favorite)
                 {
                     b.setText("FAVORITE");
@@ -277,15 +277,13 @@ public class DetailActivityFragment extends Fragment {
                     b.setText("FAVORITE");
                     b.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.MULTIPLY);
                 }
-
-                return rootVieww;
                 }
             }
 
 
 
 
-        View rootView= inflater.inflate(R.layout.fragment_detail, container, false);
+
         Intent intent=getActivity().getIntent();
         getActivity().setTitle("Movie Details");
 
