@@ -224,13 +224,14 @@ public class DetailActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-          ArrayList<String> title= bundle.getStringArrayList("Key_Title");
-            TextView textView = (TextView) getActivity().findViewById(R.id.title);
-            for(int i=0;i<title.size();i++) {
-                textView.setText(title.get(i));
+        if(savedInstanceState==null) {
+            Bundle bundle = this.getArguments();
+            if (bundle != null) {
+                ArrayList<String> title = bundle.getStringArrayList("Key_Title");
+                TextView textView = (TextView) getActivity().findViewById(R.id.title);
+                for (int i = 0; i < title.size(); i++) {
+                    textView.setText(title.get(i));
+                }
             }
         }
 

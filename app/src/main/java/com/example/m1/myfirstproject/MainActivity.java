@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -27,7 +29,9 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(findViewById(R.id.container_detail) != null) {
+        LinearLayout outer=(LinearLayout)findViewById(R.id.outer);
+        FrameLayout container_detail=(FrameLayout)outer.findViewById(R.id.container_detail);
+        if(container_detail != null) {
             mTwoPane = true;
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container_detail, new DetailActivityFragment()
