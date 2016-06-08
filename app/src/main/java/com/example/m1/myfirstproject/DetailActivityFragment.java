@@ -1,5 +1,6 @@
 package com.example.m1.myfirstproject;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -51,7 +52,7 @@ public class DetailActivityFragment extends Fragment {
     public static String youtubes;
     public static String comments=new String();
     private ShareActionProvider shareActionProvider;
-    static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
+    static String API_KEY = "\n";
 
     public DetailActivityFragment() {
     }
@@ -305,7 +306,31 @@ public class DetailActivityFragment extends Fragment {
 
                 b.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        Button b=(Button)getActivity().findViewById(R.id.favorite);
+                        if(b.getText().equals("FAVORITE"))
+                        {
+                            b.setText("UNFAVORITE");
+                            b.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
 
+                            ContentValues contentValues=new ContentValues();
+                            contentValues.put(MovieProvider.NAME,DetailActivityFragment.path);
+                            contentValues.put(MovieProvider.OVERVIEW,DetailActivityFragment.overview);
+                            contentValues.put(MovieProvider.DATE,DetailActivityFragment.date);
+                            contentValues.put(MovieProvider.TITLE,DetailActivityFragment.title);
+                            contentValues.put(MovieProvider.ID,DetailActivityFragment.idsFavorites);
+                            contentValues.put(MovieProvider.RATING,DetailActivityFragment.rating);
+                            contentValues.put(MovieProvider.REVIEW,DetailActivityFragment.comments);
+                            contentValues.put(MovieProvider.YOUTUBE,DetailActivityFragment.youtubes);
+                            getContext().getContentResolver().insert(MovieProvider.CONTENT_URI, contentValues);
+
+                        }
+                        else
+                        {
+                            b.setText("FAVORITE");
+                            b.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.MULTIPLY);
+                            getContext().getContentResolver().delete(Uri.parse("content://com.example.provider.Movies/movies"), "title=?",
+                                    new String[]{DetailActivityFragment.title});
+                        }
                     }
                 });
             }
