@@ -3,6 +3,7 @@ package com.example.m1.myfirstproject;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -253,6 +254,14 @@ public class DetailActivityFragment extends Fragment {
                 idsFavorites=bundle.getString("Key_Ids");
                 YoutubeReviewLoadTask youtubeReviewLoadTask = new YoutubeReviewLoadTask();
                 youtubeReviewLoadTask.execute();
+                Button b2=(Button)rootView.findViewById(R.id.trailer);
+                b2.setOnClickListener(new View.OnClickListener() {
+                                               public void onClick(View v) {
+                                                   Intent browserIntent=new Intent(Intent.ACTION_VIEW,
+                                                           Uri.parse("http://youtube.com" + "/watch?v="+youtubes));
+                                                   startActivity(browserIntent);
+                                               }
+                                           });
                 ReviewLoadTask reviewLoadTask = new ReviewLoadTask();
                 reviewLoadTask.execute();
                 TextView textView = (TextView) rootView.findViewById(R.id.review);
@@ -293,7 +302,13 @@ public class DetailActivityFragment extends Fragment {
                     b.setText("FAVORITE");
                     b.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.MULTIPLY);
                 }
-                }
+
+                b.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                    }
+                });
+            }
             }
 
 
