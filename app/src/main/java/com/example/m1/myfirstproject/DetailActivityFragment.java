@@ -95,11 +95,13 @@ public class DetailActivityFragment extends Fragment {
 
     public String getReviewFromID(String ids) throws IOException {
         Bundle bundle=getArguments();
-        if(bundle!=null)
+        if(MainActivity.mTwoPane==true)
         {
             reviewId = bundle.getString("Key_Ids");
         }
-        reviewId = getActivity().getIntent().getStringExtra("id");
+        else {
+            reviewId = getActivity().getIntent().getStringExtra("id");
+        }
         String result = new String();
             HttpURLConnection connection = null;
             BufferedReader bufferedReader = null;
