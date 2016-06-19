@@ -60,7 +60,7 @@ public class MainActivityFragment extends Fragment {
     static ArrayList<Boolean> favorite;
     static ArrayList<String> ids;
 
-    static String API_KEY = "21995beed75871d8c1185db655692d5f\n";
+    static String API_KEY = "\n";
 
 
 
